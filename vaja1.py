@@ -2,35 +2,36 @@ import cv2 as cv
 import numpy as np
 
 
+
 def konvolucija(slika, jedro):
-        # Določite dimenzije vhodne slike in jedra
-    if len(slika.shape) == 3:  # Če je slika večkanalna (npr. RGB), vzamemo samo prvi kanal
-        image_height, image_width, num_channels = slika.shape
-    else:
-        image_height, image_width = slika.shape
-        num_channels = 1
+    # Dobimo dimenzije slike in jedra
+    visina_slike, sirina_slike, kanali = slika.shape
+    visina_jedra, sirina_jedra = jedro.shape
     
-    # Določite dimenzije jedra
-    kernel_height, kernel_width = jedro.shape
+    # Izračunamo velikost območja prekrivanja glede na velikost jedra
+    prekrivanje_vrstice = (visina_jedra - 1) // 2
+    prekrivanje_stolpci = (sirina_jedra - 1) // 2
     
-    # Nastavite padding, da se izognete izgubi robov pri konvoluciji
-    padding_height = kernel_height // 2
-    padding_width = kernel_width // 2
+    # Nastavimo novo sliko, ki bo rezultat konvolucije
+    nova_slika = np.zeros_like(slika)
     
-    # Ustvarite izhodno sliko
-    output = np.zeros_like(slika)
+    # Ustvarimo novo sliko z dodatnim robom
+    slika_z_robom = np.pad(slika, ((prekrivanje_vrstice, prekrivanje_vrstice), (prekrivanje_stolpci, prekrivanje_stolpci), (0, 0)), mode='constant', constant_values=0)
     
-    # Izvedite konvolucijo
-    for i in range(padding_height, image_height - padding_height):
-        for j in range(padding_width, image_width - padding_width):
-            # Izračunajte vrednost konvolucije za trenutno pozicijo
-            sum = 0
-            for m in range(kernel_height):
-                for n in range(kernel_width):
-                    sum += jedro[m, n] * slika[i - padding_height + m, j - padding_width + n]
-            output[i, j] = sum
-    
-    return output
+    # Opravimo konvolucijo za vsak kanal posebej
+    for kanal in range(kanali):
+        for i in range(prekrivanje_vrstice, visina_slike + prekrivanje_vrstice):
+            for j in range(prekrivanje_stolpci, sirina_slike + prekrivanje_stolpci):
+                # Izračunamo konvolucijo za trenutno pikslo in kanal
+                rezultat = 0
+                for m in range(-prekrivanje_vrstice, prekrivanje_vrstice + 1):
+                    for n in range(-prekrivanje_stolpci, prekrivanje_stolpci + 1):
+                        # Izračunamo konvolucijski element
+                        rezultat += slika_z_robom[i + m, j + n, kanal] * jedro[prekrivanje_vrstice + m, prekrivanje_stolpci + n]
+                # Shrani rezultat v novo sliko
+                nova_slika[i - prekrivanje_vrstice, j - prekrivanje_stolpci, kanal] = rezultat / np.sum(jedro)  # Normalizacija rezultata
+                
+    return nova_slika
     
 
 def filtriraj_z_gaussovim_jedrom(slika,sigma):
@@ -42,12 +43,24 @@ def filtriraj_sobel_smer(slika):
     pass
   
 if __name__ == '__main__':    
-    jedro = np.array([[1, 1, 1],
-                     [1, 1, 1],
-                     [1, 1, 1]])
+    jedro = np.array([  [1, 2, 1],
+                        [2, 4, 2],
+                        [1, 2, 1]])
     slika = cv.imread('lenna.png')
-    slike=konvolucija(slika,jedro)
-    cv.imshow("neke",slika)
+    
+    slike_nov=konvolucija(slika,jedro)
+    #cv.imshow("neke",slike_nov)
+    slike_nov2=konvolucija(slike_nov,jedro)
+    slike_nov3=konvolucija(slike_nov2,jedro)
+    cv.imshow("neke",slike_nov)
     cv.waitKey(0)
+    cv.imshow("neke",slike_nov2)
+    cv.waitKey(0)
+    cv.imshow("neke",slike_nov3)
+    cv.waitKey(0)
+    
+        
+
+    print("neke")
    
     pass
