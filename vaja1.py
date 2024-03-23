@@ -35,8 +35,24 @@ def konvolucija(slika, jedro):
     
 
 def filtriraj_z_gaussovim_jedrom(slika,sigma):
-    '''Filtrira sliko z Gaussovim jedrom..'''
-    pass
+      # Izračun velikosti jedra
+    velikost_jedra = int((2 * sigma) * 2 + 1)
+    
+    # Izračun posameznih vrednosti znotraj jedra
+    k = velikost_jedra // 2 - 0.5
+    jedro = np.zeros((velikost_jedra, velikost_jedra))
+    for i in range(velikost_jedra):
+        for j in range(velikost_jedra):
+            H = 1 / (2 * np.pi * sigma ** 2) * np.exp(-((i - k) ** 2 + (j - k) ** 2) / (2 * sigma ** 2))
+            jedro[i, j] = H
+    
+    # Normalizacija jedra
+    jedro /= np.sum(jedro)
+    
+    # Uporaba konvolucije za filtriranje slike
+    filtrirana_slika = konvolucija(slika, jedro)
+    
+    return filtrirana_slika
 
 def filtriraj_sobel_smer(slika):
     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
@@ -48,15 +64,10 @@ if __name__ == '__main__':
                         [1, 2, 1]])
     slika = cv.imread('lenna.png')
     
-    slike_nov=konvolucija(slika,jedro)
+    slike_nov=filtriraj_z_gaussovim_jedrom(slika,3)
     #cv.imshow("neke",slike_nov)
-    slike_nov2=konvolucija(slike_nov,jedro)
-    slike_nov3=konvolucija(slike_nov2,jedro)
+    
     cv.imshow("neke",slike_nov)
-    cv.waitKey(0)
-    cv.imshow("neke",slike_nov2)
-    cv.waitKey(0)
-    cv.imshow("neke",slike_nov3)
     cv.waitKey(0)
     
         
