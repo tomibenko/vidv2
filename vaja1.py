@@ -1,13 +1,6 @@
 import cv2 as cv
 import numpy as np
 
-
-import numpy as np
-
-import numpy as np
-
-import numpy as np
-
 def konvolucija(slika, jedro):
     visina_jedra, _ = jedro.shape
     prekrivanje = (visina_jedra - 1) // 2
@@ -83,8 +76,8 @@ if __name__ == "__main__":
     jedro = np.array([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
     slika = cv.imread("lenna.png")
 
-    slike_nov = filtriraj_sobel_horizontalno(slika)
-    #slike_nov=filtriraj_z_gaussovim_jedrom(slika,2)
+    #slike_nov = filtriraj_sobel_horizontalno(slika)
+    slike_nov=filtriraj_z_gaussovim_jedrom(slika,1)
     #slike_nov=konvolucija(slika,jedro)
     # cv.imshow("neke",slike_nov)
 
