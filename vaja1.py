@@ -52,6 +52,7 @@ def filtriraj_z_gaussovim_jedrom(slika, sigma):
             jedro[i, j] = H
 
     jedro /= np.sum(jedro)
+    print(jedro)
     filtrirana_slika = konvolucija(slika, jedro)
     return filtrirana_slika
 
@@ -73,9 +74,13 @@ def filtriraj_sobel_horizontalno(slika):
 
 
 if __name__ == "__main__":
-    jedro = np.array([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+    jedro = np.array([
+    [1/9, 1/9, 1/9],
+    [1/9, 1/9, 1/9],
+    [1/9, 1/9, 1/9]
+])
     slika = cv.imread("lenna.png")
-
+    slika = np.uint8(slika)
     #slike_nov = filtriraj_sobel_horizontalno(slika)
     slike_nov=filtriraj_z_gaussovim_jedrom(slika,1)
     #slike_nov=konvolucija(slika,jedro)
