@@ -14,9 +14,9 @@ jobs:
     - name: Set up Python
       uses: actions/checkout@v4
     - name: setup
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: 3
+        python-version: 3.9
 
     - name: Install dependencies
       run: |
