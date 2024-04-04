@@ -14,9 +14,9 @@ jobs:
     - name: Set up Python
       uses: actions/checkout@v4
     - name: setup
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v2
       with:
-            version: 3.11.6
+        python-version: 3.8
 
     - name: Install dependencies
       run: |
