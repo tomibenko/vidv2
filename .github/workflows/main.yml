@@ -23,9 +23,9 @@ jobs:
         run: echo $GITHUB_WORKSPACE
 
       - name: Nastavi Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.11.6
+          python-version: 3.9
       
       - name: Namesti odvisnosti
         run: |
