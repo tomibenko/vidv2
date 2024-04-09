@@ -28,7 +28,7 @@ jobs:
           python-version: 3.9
       - name: verzija linux
         run: | 
-          uname -a:
+          uname -a
           uname -r
       - name: Namesti odvisnosti
         run: |
