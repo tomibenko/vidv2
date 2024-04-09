@@ -20,7 +20,7 @@ jobs:
 
       # Predpostavljamo, da je DockerHub nastavljen kot remote za Docker
       - name: Push Docker image to DockerHub
-        run: docker push tomibenko/vidv2:TomiBenko
+        run: docker push tomibenko/vidv2
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
