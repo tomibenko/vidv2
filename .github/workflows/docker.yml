@@ -16,7 +16,7 @@ jobs:
 
       # Predpostavljamo, da je Dockerfile v korenskem imeniku projekta
       - name: Build Docker image
-        run: docker build -t your_image_name .
+        run: docker build -t tomibenko/vidv2 .
 
       # Predpostavljamo, da je DockerHub nastavljen kot remote za Docker
       - name: Push Docker image to DockerHub
