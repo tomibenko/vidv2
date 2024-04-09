@@ -6,6 +6,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+<<<<<<< HEAD
       - name: Deploy image
         run: ./zapakiraj_27101.sh
 
@@ -14,3 +15,15 @@ jobs:
 
       - name: Push Docker image to DockerHub
         run: docker push tomibenko/vidv2
+=======
+      - name: Build Docker image
+        run: docker build -t tomibenko/vidv2 .
+
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Docker image to DockerHub
+        run: docker push tomibenko/vidv2
+
+>>>>>>> bb6c8ff0371294633f6f843364690b4b96c5aa85
