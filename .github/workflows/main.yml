@@ -36,6 +36,6 @@ jobs:
           pip install -r requirements.txt
       # Runs a single command using the runners shell
       - name: Zaženi teste
-        run: pytest
+        run: python test.py
 
       
