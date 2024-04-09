@@ -52,8 +52,7 @@ jobs:
         shell: bash
 
       - name: Run tests
-        run: |
-          python test.py
+        run: python test.py
 
       - name: Check for error file
         run: |
