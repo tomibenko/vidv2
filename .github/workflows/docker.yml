@@ -1,3 +1,11 @@
+name: Deploy na DockerHub
+
+on:
+  workflow_run:
+    workflows: ["Testiranje projekta"]
+    types:
+      - completed
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -5,7 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
 
       - name: Deploy image
         run: ./zapakiraj_27101.sh
@@ -15,3 +22,5 @@ jobs:
 
       - name: Push Docker image to DockerHub
         run: docker push tomibenko/vidv2
+
+
