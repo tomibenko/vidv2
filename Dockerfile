@@ -1,4 +1,4 @@
-FROM  python:3.9-alpha
+FROM  python:3.9-alpine
 RUN pip install --no-cache-dir -r requirements.txt
 WORKDIR /app
 COPY . /app
