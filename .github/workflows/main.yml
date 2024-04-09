@@ -21,7 +21,8 @@ jobs:
           fi
         shell: bash
         
-      - name: Upload test scripts artifact
+       - name: Upload test scripts artifact
+        if: success()
         uses: actions/upload-artifact@v2
         with:
           name: test_scripts
