@@ -54,6 +54,7 @@ jobs:
       - name: Run tests
         run: python test.py
 
+
       - name: Check for error file
         run: |
           if [ -f napaka.txt ]; then
