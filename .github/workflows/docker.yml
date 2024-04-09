@@ -1,0 +1,27 @@
+name: Deploy na DockerHub
+
+on:
+  workflow_run:
+    workflows: ["Testiranje projekta"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: testiranje_projekta
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Predpostavljamo, da je Dockerfile v korenskem imeniku projekta
+      - name: Build Docker image
+        run: docker build -t your_image_name .
+
+      # Predpostavljamo, da je DockerHub nastavljen kot remote za Docker
+      - name: Push Docker image to DockerHub
+        run: docker push tomibenko/vidv2:TomiBenko
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
