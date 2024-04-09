@@ -18,6 +18,8 @@ jobs:
       - name: Build Docker image
         run: docker build -t tomibenko/vidv2 .
 
+      - name: Log into registry
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.hub.docker.com
       # Predpostavljamo, da je DockerHub nastavljen kot remote za Docker
       - name: Push Docker image to DockerHub
         run: docker push tomibenko/vidv2
