@@ -14,12 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Predpostavljamo, da je Dockerfile v korenskem imeniku projekta
       - name: Build Docker image
         run: docker build -t tomibenko/vidv2 .
 
-     
-      # Predpostavljamo, da je DockerHub nastavljen kot remote za Docker
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
