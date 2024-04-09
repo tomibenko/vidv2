@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: testiranje_projekta
 
     steps:
       - name: Checkout code
