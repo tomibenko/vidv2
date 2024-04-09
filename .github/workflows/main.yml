@@ -19,7 +19,7 @@ jobs:
           else
             echo "Napaka: Testni skript 'test.py' ne obstaja" > napaka.txt
           fi
-           shell: bash
+        shell: bash
         
       - name: Upload test scripts artifact
         if: success()
