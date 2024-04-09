@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-import vaja1 # Assuming your script file is named 'your_script.py'
+import vaja1
 
 def test_konvolucija():
     # Create a simple test image and kernel
