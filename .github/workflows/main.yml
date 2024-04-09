@@ -14,12 +14,12 @@ jobs:
       
       - name: Check if test scripts exist
         run: |
-          if [ -d test ]; then
-            ls test/*.py > test_scripts.txt
+          if [ -f test.py ]; then
+            echo "test.py" > test_scripts.txt
           else
-            echo "Napaka: Testni skripti ne obstajajo" > napaka.txt
+            echo "Napaka: Testni skript 'test.py' ne obstaja" > napaka.txt
           fi
-        shell: bash
+           shell: bash
         
       - name: Upload test scripts artifact
         if: success()
