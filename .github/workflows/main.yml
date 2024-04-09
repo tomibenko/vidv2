@@ -23,9 +23,9 @@ jobs:
         
       - name: Upload test scripts artifact
         if: success()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: test_scripts
+          path: test_scripts.txt
           if-no-files-found: error
 
   run_tests:
